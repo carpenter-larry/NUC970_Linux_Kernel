@@ -893,6 +893,7 @@ static struct spi_board_info nuc970_spi0_board_info[] __initdata = {
 #endif
 
 #ifdef CONFIG_SPI_SPIDEV
+	/* modify by lzb
         {
                 .modalias = "spidev",
                 .max_speed_hz = 18750000,
@@ -900,6 +901,7 @@ static struct spi_board_info nuc970_spi0_board_info[] __initdata = {
                 .chip_select = 1,       //use SS1
                 .mode = SPI_MODE_0,
         },
+	*/
 #endif
 };
 
@@ -977,7 +979,8 @@ static struct flash_platform_data nuc970_spi1_flash_data = {
 #endif
 
 static struct spi_board_info nuc970_spi1_board_info[] __initdata = {
-#ifdef CONFIG_MTD_M25P80
+//#ifdef CONFIG_MTD_M25P80
+#if 0    // modify by lzb
         {
                 .modalias = "m25p80",
                 .max_speed_hz = 18750000,
@@ -988,6 +991,16 @@ static struct spi_board_info nuc970_spi1_board_info[] __initdata = {
         },
 #endif
 #ifdef CONFIG_SPI_SPIDEV
+	// add by lzb
+	
+        {
+                .modalias = "spidev",
+                .max_speed_hz = 18750000,
+                .bus_num = 1,
+                .chip_select = 0,       //use SS1
+                .mode = SPI_MODE_0,
+        },
+#ifdef CONFIG_SPI_NUC970_P1_SS1
         {
                 .modalias = "spidev",
                 .max_speed_hz = 18750000,
@@ -995,6 +1008,7 @@ static struct spi_board_info nuc970_spi1_board_info[] __initdata = {
                 .chip_select = 1,       //use SS1
                 .mode = SPI_MODE_0,
         },
+#endif
 #endif
 };
 #endif
